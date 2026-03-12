@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Detector de Mentiras PRO</title>
+
+<style>
+body{
+background:black;
+color:#00ff00;
+font-family:monospace;
+text-align:center;
+padding:40px;
+}
+
+h1{
+font-size:40px;
+}
+
+input{
+padding:12px;
+width:80%;
+max-width:300px;
+border:2px solid #00ff00;
+background:black;
+color:#00ff00;
+font-size:16px;
+}
+
+button{
+margin-top:20px;
+padding:15px 30px;
+font-size:18px;
+border:2px solid #00ff00;
+background:black;
+color:#00ff00;
+cursor:pointer;
+}
+
+#scanner{
+margin-top:30px;
+width:250px;
+height:250px;
+border-radius:50%;
+border:3px solid #00ff00;
+margin-left:auto;
+margin-right:auto;
+position:relative;
+overflow:hidden;
+display:none;
+}
+
+.linha{
+width:100%;
+height:4px;
+background:#00ff00;
+position:absolute;
+animation:scan 2s infinite;
+}
+
+@keyframes scan{
+0%{top:0;}
+100%{top:100%;}
+}
+
+#resultado{
+margin-top:30px;
+font-size:35px;
+}
+
+#porcentagem{
+font-size:25px;
+margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🟢 Detector de Mentiras PRO</h1>
+
+<p>Digite sua pergunta</p>
+
+<input id="pergunta" placeholder="Ex: Você está mentindo?">
+
+<br>
+
+<button onclick="analisar()">ESCANEAR</button>
+
+<div id="scanner">
+<div class="linha"></div>
+</div>
+
+<div id="resultado"></div>
+<div id="porcentagem"></div>
+
+<audio id="som">
+<source src="https://www.soundjay.com/buttons/sounds/button-09.mp3">
+</audio>
+
+<script>
+
+function analisar(){
+
+let pergunta = document.getElementById("pergunta").value;
+
+if(pergunta==""){
+alert("Digite uma pergunta!");
+return;
+}
+
+document.getElementById("scanner").style.display="block";
+document.getElementById("resultado").innerHTML="";
+document.getElementById("porcentagem").innerHTML="";
+
+document.getElementById("som").play();
+
+setTimeout(function(){
+
+let resultado = Math.random() < 0.5 ? "✅ VERDADE" : "❌ MENTIRA";
+let porcentagem = Math.floor(Math.random()*100);
+
+document.getElementById("scanner").style.display="none";
+document.getElementById("resultado").innerHTML = resultado;
+document.getElementById("porcentagem").innerHTML = "Chance de mentira: "+porcentagem+"%";
+
+navigator.vibrate(300);
+
+},3000);
+
+}
+
+</script>
+
+</body>
+</html>
